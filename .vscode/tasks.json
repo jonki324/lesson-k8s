@@ -1,0 +1,10 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "quarkus:dev",
+      "type": "shell",
+      "command": "./mvnw compile quarkus:dev"
+    }
+  ]
+}

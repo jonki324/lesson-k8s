@@ -1,0 +1,6 @@
+{
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.checkstyle.configuration": "${workspaceFolder}/google_checks.xml",
+  "java.format.settings.url": "/eclipse-java-google-style.xml",
+  "java.saveActions.organizeImports": true
+}
