@@ -1,0 +1,112 @@
+---
+openapi: 3.0.3
+info:
+  title: lesson-k8s API
+  version: 1.0.0-SNAPSHOT
+paths:
+  /api/memos:
+    get:
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Memo'
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Memo'
+      responses:
+        "201":
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Memo'
+  /api/memos/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Memo'
+    put:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Memo'
+      responses:
+        "200":
+          description: updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Memo'
+    delete:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Memo'
+      responses:
+        "204":
+          description: deleted
+components:
+  schemas:
+    Color:
+      enum:
+      - BLUE
+      - DEFAULT
+      - GREEN
+      - RED
+      type: string
+    Memo:
+      type: object
+      properties:
+        body:
+          type: string
+        color:
+          $ref: '#/components/schemas/Color'
+        createdAt:
+          format: date-time
+          type: string
+        id:
+          format: int64
+          type: integer
+        title:
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        version:
+          format: int32
+          type: integer
