@@ -7,6 +7,11 @@
   <version>1.0.0-SNAPSHOT</version>
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
+    <frontend-node.version>v14.17.6</frontend-node.version>
+    <frontend-plugin.version>1.12.0</frontend-plugin.version>
+    <frontend-yarn.version>v1.22.11</frontend-yarn.version>
+    <frontend.working.dir>src/main/frontend</frontend.working.dir>
+    <lombok.version>1.18.20</lombok.version>
     <maven.compiler.parameters>true</maven.compiler.parameters>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
@@ -16,11 +21,6 @@
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
     <quarkus.platform.version>2.2.3.Final</quarkus.platform.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
-    <frontend-plugin.version>1.12.0</frontend-plugin.version>
-    <frontend-node.version>v14.17.6</frontend-node.version>
-    <frontend-yarn.version>v1.22.11</frontend-yarn.version>
-    <frontend.working.dir>src/main/frontend</frontend.working.dir>
-    <lombok.version>1.18.20</lombok.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -59,6 +59,10 @@
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -111,18 +115,13 @@
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
         <version>${frontend-plugin.version}</version>
-        <configuration>
-          <workingDirectory>${frontend.working.dir}</workingDirectory>
-          <nodeVersion>${frontend-node.version}</nodeVersion>
-          <yarnVersion>${frontend-yarn.version}</yarnVersion>
-        </configuration>
         <executions>
           <execution>
             <id>install-node-and-yarn</id>
+            <phase>generate-resources</phase>
             <goals>
               <goal>install-node-and-yarn</goal>
             </goals>
-            <phase>generate-resources</phase>
           </execution>
           <execution>
             <id>yarn-install</id>
@@ -134,6 +133,11 @@
             </configuration>
           </execution>
         </executions>
+        <configuration>
+          <workingDirectory>${frontend.working.dir}</workingDirectory>
+          <nodeVersion>${frontend-node.version}</nodeVersion>
+          <yarnVersion>${frontend-yarn.version}</yarnVersion>
+        </configuration>
       </plugin>
     </plugins>
   </build>

@@ -1,7 +1,6 @@
 package com.example.services;
 
 import java.util.List;
-import java.util.Optional;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -16,8 +15,9 @@ public class MemoService {
     @Inject
     MemoRepository memoRepository;
 
-    public Optional<Memo> get(Long id) {
-        return memoRepository.findByIdOptional(id);
+    public Memo get(Long id) {
+        return memoRepository.findByIdOptional(id)
+                .orElseThrow(() -> new WebApplicationException(Status.NOT_FOUND));
     }
 
     public List<Memo> getAll() {

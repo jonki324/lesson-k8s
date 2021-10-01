@@ -16,6 +16,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import com.example.entities.Memo;
 import com.example.services.MemoService;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
 @RequestScoped
 @Path("/memos")
@@ -28,12 +31,8 @@ public class MemoResource {
 
     @Path("/{id}")
     @GET
-    public Response get(@PathParam("id") Long id) {
-        var memo = memoService.get(id);
-        if (memo.isEmpty()) {
-            return Response.status(Status.NOT_FOUND).build();
-        }
-        return Response.ok(memo.get()).build();
+    public Memo get(@PathParam("id") Long id) {
+        return memoService.get(id);
     }
 
     @GET
@@ -42,6 +41,9 @@ public class MemoResource {
     }
 
     @POST
+    @APIResponse(responseCode = "201", description = "created",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Memo.class)))
     public Response create(Memo memo) {
         var result = memoService.create(memo);
         return Response.status(Status.CREATED).entity(result).build();
@@ -49,6 +51,9 @@ public class MemoResource {
 
     @Path("/{id}")
     @PUT
+    @APIResponse(responseCode = "200", description = "updated",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Memo.class)))
     public Response update(@PathParam("id") Long id, Memo memo) {
         memo.setId(id);
         var result = memoService.update(memo);
@@ -57,6 +62,7 @@ public class MemoResource {
 
     @Path("/{id}")
     @DELETE
+    @APIResponse(responseCode = "204", description = "deleted")
     public Response delete(@PathParam("id") Long id, Memo memo) {
         memo.setId(id);
         memoService.delete(memo);
