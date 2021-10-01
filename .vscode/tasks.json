@@ -5,6 +5,11 @@
       "label": "quarkus:dev",
       "type": "shell",
       "command": "./mvnw compile quarkus:dev"
+    },
+    {
+      "label": "mvn:clean:install",
+      "type": "shell",
+      "command": "./mvnw clean install"
     }
   ]
 }

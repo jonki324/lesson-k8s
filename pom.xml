@@ -16,6 +16,11 @@
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
     <quarkus.platform.version>2.2.3.Final</quarkus.platform.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
+    <frontend-plugin.version>1.12.0</frontend-plugin.version>
+    <frontend-node.version>v14.17.6</frontend-node.version>
+    <frontend-yarn.version>v1.22.11</frontend-yarn.version>
+    <frontend.working.dir>src/main/frontend</frontend.working.dir>
+    <lombok.version>1.18.20</lombok.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -36,6 +41,24 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-hibernate-orm-panache</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jdbc-postgresql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-jackson</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -69,6 +92,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${compiler-plugin.version}</version>
         <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
           <parameters>${maven.compiler.parameters}</parameters>
         </configuration>
       </plugin>
@@ -85,11 +110,11 @@
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
-        <version>1.12.0</version>
+        <version>${frontend-plugin.version}</version>
         <configuration>
-          <workingDirectory>src/main/frontend</workingDirectory>
-          <nodeVersion>v14.17.6</nodeVersion>
-          <yarnVersion>v1.22.11</yarnVersion>
+          <workingDirectory>${frontend.working.dir}</workingDirectory>
+          <nodeVersion>${frontend-node.version}</nodeVersion>
+          <yarnVersion>${frontend-yarn.version}</yarnVersion>
         </configuration>
         <executions>
           <execution>
