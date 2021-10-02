@@ -1,6 +1,7 @@
 import React from 'react';
-import { CssBaseline } from '@mui/material';
+import { CssBaseline, Grid } from '@mui/material';
 import Layout from '../Layout/Layout';
+import PageHeader from '../PageHeader/PageHeader';
 import './App.css';
 
 const App = (): React.ReactElement => {
@@ -8,7 +9,11 @@ const App = (): React.ReactElement => {
     <>
       <CssBaseline />
       <Layout>
-        <div>Hello</div>
+        <Grid container>
+          <Grid item xs={12} textAlign="center">
+            <PageHeader>Memo List</PageHeader>
+          </Grid>
+        </Grid>
       </Layout>
     </>
   );
