@@ -12,7 +12,7 @@ export type State = {
 const initialState: State = {
   memoList: [],
   selectedMemo: {} as Memo,
-  isEditMode: false,
+  isEditMode: true,
 };
 
 type AppCtxType = {

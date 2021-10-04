@@ -26,8 +26,9 @@ const deleteMemo = (payload: { memo: Memo }) => ({
   payload,
 });
 
-const fetchAllMemo = () => ({
+const fetchAllMemo = (payload: { memoList: Memo[] }) => ({
   type: FETCH_ALL_MEMO,
+  payload,
 });
 
 export type Actions = ReturnType<
