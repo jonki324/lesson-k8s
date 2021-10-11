@@ -40,3 +40,4 @@ nb-configuration.xml
 
 # React Build
 src/main/resources/META-INF/resources/*
+ssl/
